@@ -1,0 +1,17 @@
+:root {
+  --background-color: #f4f4f4;
+  --text-color: #000;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: Helvetica, sans-serif;
+  color: var(--text-color);
+  background: var(--background-color);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
