@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-ts",
-  "description": "A TypeScript starter for Gatsby that includes all you need to build amazing projects",
+  "name": "hinge-resume",
+  "description": "A resume based on Hinge",
   "version": "1.0.0",
   "private": true,
-  "author": "João Pedro Schmitz <oi@joaopedro.cc> (joaopedro.cc)",
+  "author": "David Leger (@davidleger95)",
   "license": "MIT",
   "keywords": [
     "gatsby",
@@ -33,9 +33,13 @@
     ]
   },
   "dependencies": {
+    "babel-plugin-styled-components": "^1.11.1",
     "gatsby": "2.24.63",
+    "gatsby-plugin-styled-components": "^3.3.14",
+    "normalize.css": "^8.0.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "styled-components": "^5.2.0",
     "tsconfig-paths-webpack-plugin": "3.3.0"
   },
   "devDependencies": {
