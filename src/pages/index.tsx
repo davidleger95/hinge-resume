@@ -8,12 +8,14 @@ const Container = styled.div`
   display: grid;
   gap: 2rem;
   padding: 1rem;
+  margin: auto;
+  max-width: 600px;
 `;
 
 const CardHeader = styled.h2`
   font-size: 0.9rem;
   margin: 0;
-  padding: 1rem;
+  padding: 1rem 1.5rem;
 `;
 
 const CardImage = styled.img`
@@ -25,7 +27,7 @@ const CardText = styled.p`
   font-family: Palatino, serif;
   font-size: 2rem;
   margin: 0;
-  padding: 1rem;
+  padding: 0.75rem 1.5rem;
 `;
 
 const isTextCard = (props: { children?: ReactChildren }) => {
