@@ -1,6 +1,8 @@
 :root {
   --background-color: #f4f4f4;
   --text-color: #000;
+
+  --pink: #e9baa7;
 }
 
 html {
@@ -14,4 +16,8 @@ html {
 *::before,
 *::after {
   box-sizing: inherit;
+}
+
+.icon {
+  height: 1.5em;
 }

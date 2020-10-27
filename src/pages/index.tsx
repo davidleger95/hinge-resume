@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { ReactChildren } from 'react';
 import { PageProps } from 'gatsby';
 import styled from 'styled-components';
 import Header from '../components/Header';
+import LikeIcon from '../icons/like.svg';
 
 const Container = styled.div`
   display: grid;
@@ -9,22 +10,8 @@ const Container = styled.div`
   padding: 1rem;
 `;
 
-const Card = styled.section`
-  position: relative;
-  background: #fff;
-  border-radius: 0.5rem;
-  overflow: hidden;
-`;
-
 const CardHeader = styled.h2`
   font-size: 0.9rem;
-  margin: 0;
-  padding: 1rem;
-`;
-
-const CardText = styled.p`
-  font-family: Palatino, serif;
-  font-size: 2rem;
   margin: 0;
   padding: 1rem;
 `;
@@ -34,20 +21,54 @@ const CardImage = styled.img`
   display: block;
 `;
 
+const CardText = styled.p`
+  font-family: Palatino, serif;
+  font-size: 2rem;
+  margin: 0;
+  padding: 1rem;
+`;
+
+const isTextCard = (props: { children?: ReactChildren }) => {
+  const children = Array.isArray(props.children)
+    ? props.children
+    : [props.children];
+
+  const textChildren = children.filter((child) => child.type === CardText);
+  const hasTextChildren = textChildren.length > 0;
+
+  return hasTextChildren;
+};
+
+const Card = styled.section`
+  position: relative;
+  background: #fff;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  padding: ${(props) => (isTextCard(props) ? '3.5rem' : '0')} 0;
+`;
+
 const LikeButton = styled.button`
+  --shadow: 0 0 0.75rem 0 #0002;
+
   position: absolute;
   bottom: 1rem;
   right: 1rem;
-  height: 3rem;
-  width: 3rem;
+  height: 2.75em;
+  width: 2.75em;
   display: grid;
   align-items: center;
   justify-items: center;
   border-radius: 50%;
   border: none;
   background: #fff;
-  box-shadow: 0 0 1rem 0 #0004;
+  box-shadow: var(--shadow);
   cursor: pointer;
+  font-size: 1.25em;
+
+  &:focus {
+    outline: none;
+    box-shadow: var(--shadow), 0 0 0 2px var(--pink);
+  }
 `;
 
 const Home: React.FC<PageProps> = () => (
@@ -57,18 +78,15 @@ const Home: React.FC<PageProps> = () => (
       <Card>
         <CardImage src="http://www.fillmurray.com/400/400" alt="" />
         <LikeButton>
-          <span
-            role="img"
-            aria-label="Like"
-            style={{ fontFamily: 'monospace' }}
-          >
-            &lt;3
-          </span>
+          <LikeIcon />
         </LikeButton>
       </Card>
       <Card>
         <CardHeader>I won&apos;t shut up about</CardHeader>
         <CardText>Web accessibility and user experience.</CardText>
+        <LikeButton>
+          <LikeIcon />
+        </LikeButton>
       </Card>
 
       <Card>
