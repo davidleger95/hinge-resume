@@ -35,6 +35,7 @@
   "dependencies": {
     "babel-plugin-styled-components": "^1.11.1",
     "gatsby": "2.24.63",
+    "gatsby-plugin-react-svg": "^3.0.0",
     "gatsby-plugin-styled-components": "^3.3.14",
     "normalize.css": "^8.0.1",
     "react": "16.13.1",
