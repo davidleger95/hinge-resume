@@ -18,7 +18,7 @@ export const CardText = styled.p`
   padding: 0.75rem 1.5rem;
 `;
 
-const StyledCard = styled.section<{ isText?: boolean }>`
+export const StyledCard = styled.section<{ isText?: boolean }>`
   position: relative;
   background: #fff;
   border-radius: 0.5rem;
@@ -33,44 +33,42 @@ const LikeButton: FC<HTMLAttributes<HTMLButtonElement>> = (props) => (
 );
 
 const CardWrapper = styled.div<{ isOpen?: boolean }>`
-  position: ${(p) => (p.isOpen ? 'sticky' : 'static')};
   top: 4rem;
   bottom: 4rem;
-
   display: grid;
   gap: 2rem;
-  max-height: 100vh;
 
   z-index: ${(p) => (p.isOpen ? '999999' : 'auto')};
 
   & > * {
     box-shadow: ${(p) => (p.isOpen ? '0 0 2rem #0004' : '0 0 2rem #0000')};
   }
-
-  &::before {
-    content: '';
-    display: ${(p) => (p.isOpen ? 'block' : 'none')};
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #fff8;
-    backdrop-filter: blur(5px);
-    z-index: -1;
-  }
 `;
 
-export const Card: FC = ({ children, ...props }) => {
-  const [isOpen, setCardState] = useState(false);
-  // TODO allow constainer to scroll
+const Mask = styled.div<{ isOpen?: boolean }>`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff8;
+  backdrop-filter: blur(5px);
+  z-index: -1;
+  pointer-events: ${(p) => (p.isOpen ? 'inital' : 'none')};
+  opacity: ${(p) => (p.isOpen ? 1 : 0)};
+  transition: opacity ease-in-out 0.5s;
+`;
+
+export const Card: FC<{ isText?: boolean }> = ({ children, ...props }) => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <CardWrapper isOpen={isOpen}>
-      <StyledCard {...props}>
+      <Mask isOpen={isOpen} onClick={() => setIsOpen(false)} />
+      <StyledCard {...props} onDoubleClick={() => setIsOpen(true)}>
         {children}
-        <LikeButton onClick={() => setCardState(true)} />
+        {isOpen || <LikeButton onClick={() => setIsOpen(true)} />}
       </StyledCard>
-      {isOpen && <ContactForm />}
+      {isOpen && <ContactForm close={() => setIsOpen(false)} />}
     </CardWrapper>
   );
 };

@@ -36,7 +36,7 @@ const Description = styled.div`
   margin: 0;
   justify-content: center;
   align-content: center;
-  background: #0008;
+  background: #000c;
   color: white;
   text-align: center;
   padding: 2.5rem;
@@ -53,29 +53,41 @@ const DescriptionBody = styled.p`
   line-height: 1.35;
 `;
 
-const CardMedia: FC = () => {
+interface CardMediaProps {
+  src: string;
+  alt: string;
+  description?: {
+    heading?: string;
+    body?: string;
+  };
+}
+
+const CardMedia: FC<CardMediaProps> = ({ src, alt, description }) => {
   const [descriptionVisible, setDescriptionVisible] = useState(false);
   return (
     <div style={{ position: 'relative' }}>
-      <DescriptionButton
-        onClick={() => setDescriptionVisible((value) => !value)}
-      >
-        <DescriptionIcon />
-      </DescriptionButton>
-      {descriptionVisible && (
-        <Description onClick={() => setDescriptionVisible(false)}>
-          <DescriptionHeading>Who is Bill Murray?</DescriptionHeading>
-          <DescriptionBody>
-            Bill Murray is an American actor, comedian, and writer. Known for
-            his deadpan delivery, he first rose to fame on Saturday Night Live,
-            a series of performances that earned him his first Emmy Award, and
-            later starred in comedy films.
-          </DescriptionBody>
-        </Description>
+      {description && (
+        <>
+          <DescriptionButton
+            onClick={() => setDescriptionVisible((value) => !value)}
+          >
+            <DescriptionIcon />
+          </DescriptionButton>
+          {descriptionVisible && (
+            <Description onClick={() => setDescriptionVisible(false)}>
+              {description.heading && (
+                <DescriptionHeading>{description.heading}</DescriptionHeading>
+              )}
+              {description.body && (
+                <DescriptionBody>{description.body}</DescriptionBody>
+              )}
+            </Description>
+          )}
+        </>
       )}
       <CardImage
-        src="http://www.fillmurray.com/400/500"
-        aria-label="Bill Murray"
+        src={src}
+        aria-label={alt}
         role="img"
         onClick={() => setDescriptionVisible(true)}
       />

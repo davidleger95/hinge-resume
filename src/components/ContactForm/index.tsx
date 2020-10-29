@@ -1,18 +1,5 @@
-import React, { FC, useLayoutEffect, useState } from 'react';
-import styled from 'styled-components';
-
-function useLockBodyScroll() {
-  useLayoutEffect(() => {
-    // Get original body overflow
-    const originalStyle = window.getComputedStyle(document.body).overflow;
-    // Prevent scrolling on mount
-    document.body.style.overflow = 'hidden';
-    // Re-enable scrolling when component unmounts
-    return () => {
-      document.body.style.overflow = originalStyle;
-    };
-  }, []); // Empty array ensures effect is only run on mount and unmount
-}
+import React, { FC, useState } from 'react';
+import styled, { css } from 'styled-components';
 
 const Form = styled.form`
   display: grid;
@@ -38,22 +25,37 @@ const TextArea = styled.textarea`
   }
 `;
 
-const Button = styled.button`
+const Button = styled.button<{ secondary?: boolean }>`
   background: var(--hinge-purple);
   color: #fff;
   border-radius: 2rem;
   border: none;
   padding: 1rem;
-  max-width: 200px;
 
   &:focus {
     transform: scale(1.02);
   }
+
+  ${(p) => {
+    if (p.secondary) {
+      return css`
+        background: white;
+        color: var(--hinge-purple);
+        border: 3px solid var(--hinge-purple);
+      `;
+    }
+    return '';
+  }}
 `;
 
-const ContactForm: FC = () => {
+const FormActions = styled.div`
+  display: grid;
+  grid-auto-flow: column;
+  gap: 1rem;
+`;
+
+const ContactForm: FC<{ close: () => void }> = ({ close }) => {
   const [message, setMessage] = useState('');
-  useLockBodyScroll();
   return (
     <Form>
       <TextArea
@@ -63,7 +65,12 @@ const ContactForm: FC = () => {
       >
         {message}
       </TextArea>
-      <Button type="submit">Submit</Button>
+      <FormActions>
+        <Button type="submit">Submit</Button>
+        <Button type="button" secondary onClick={close}>
+          Close
+        </Button>
+      </FormActions>
     </Form>
   );
 };
