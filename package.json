@@ -33,6 +33,7 @@
     ]
   },
   "dependencies": {
+    "@types/styled-components": "^5.1.4",
     "babel-plugin-styled-components": "^1.11.1",
     "gatsby": "2.24.63",
     "gatsby-plugin-react-svg": "^3.0.0",

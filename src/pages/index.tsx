@@ -1,104 +1,119 @@
-import React, { ReactChildren } from 'react';
+import React, { FC } from 'react';
 import { PageProps } from 'gatsby';
-import styled from 'styled-components';
-import Header from '../components/Header';
-import LikeIcon from '../icons/like.svg';
+import profileImage from '@/images/profile.png';
+import Header from '@/components/Header';
 
-const Container = styled.div`
-  display: grid;
-  gap: 2rem;
-  padding: 1rem;
-  margin: auto;
-  max-width: 600px;
-`;
+import { Container } from '@/components/styled/Layout';
+import Card, { CardHeader, CardText, StyledCard } from '@/components/Card';
+import CardMedia from '@/components/CardMedia';
+import {
+  DescriptionList,
+  DescriptionListItem,
+  ItemTitle,
+  ItemDescription,
+} from '@/components/DescriptionList';
+import EducationIcon from '@/icons/education.svg';
+import WorkIcon from '@/icons/work.svg';
+import LocationIcon from '@/icons/location.svg';
 
-const CardHeader = styled.h2`
-  font-size: 0.9rem;
-  margin: 0;
-  padding: 1rem 1.5rem;
-`;
-
-const CardImage = styled.img`
-  width: 100%;
-  display: block;
-`;
-
-const CardText = styled.p`
-  font-family: Palatino, serif;
-  font-size: 2rem;
-  margin: 0;
-  padding: 0.75rem 1.5rem;
-`;
-
-const isTextCard = (props: { children?: ReactChildren }) => {
-  const children = Array.isArray(props.children)
-    ? props.children
-    : [props.children];
-
-  const textChildren = children.filter((child) => child.type === CardText);
-  const hasTextChildren = textChildren.length > 0;
-
-  return hasTextChildren;
-};
-
-const Card = styled.section`
-  position: relative;
-  background: #fff;
-  border-radius: 0.5rem;
-  overflow: hidden;
-  padding: ${(props) => (isTextCard(props) ? '3.5rem' : '0')} 0;
-`;
-
-const LikeButton = styled.button`
-  --shadow: 0 0 0.75rem 0 #0002;
-
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
-  height: 2.75em;
-  width: 2.75em;
-  display: grid;
-  align-items: center;
-  justify-items: center;
-  border-radius: 50%;
-  border: none;
-  background: #fff;
-  box-shadow: var(--shadow);
-  cursor: pointer;
-  font-size: 1.25em;
-
-  &:focus {
-    outline: none;
-    box-shadow: var(--shadow), 0 0 0 2px var(--pink);
-  }
-`;
-
-const Home: React.FC<PageProps> = () => (
+const Home: FC<PageProps> = () => (
   <main>
     <Header />
     <Container>
       <Card>
-        <CardImage src="http://www.fillmurray.com/400/400" alt="" />
-        <LikeButton>
-          <LikeIcon />
-        </LikeButton>
+        <CardMedia
+          src={profileImage}
+          alt="David Leger"
+          description={{
+            heading: 'An Artsy Frontend Engineer',
+            body: `
+              Hey! I'm David, but you can call me dave.js! I'm a frontend 
+              developer who is passionate about creating great experiences 
+              on the web! I love working with TypeScript, React, CSS, 
+              GraphQL, and Web Components!`,
+          }}
+        />
       </Card>
-      <Card>
+      <Card isText>
         <CardHeader>I won&apos;t shut up about</CardHeader>
         <CardText>Web accessibility and user experience.</CardText>
-        <LikeButton>
-          <LikeIcon />
-        </LikeButton>
       </Card>
 
       <Card>
-        <CardHeader>Section 3</CardHeader>
+        <CardHeader>Bill Murray</CardHeader>
+        <CardMedia
+          src="http://www.fillmurray.com/600/500"
+          alt=""
+          description={{
+            heading: 'Title',
+            body: 'Some description',
+          }}
+        />
+      </Card>
+      <StyledCard>
+        <DescriptionList>
+          <DescriptionListItem>
+            <ItemTitle>
+              <WorkIcon />
+            </ItemTitle>
+            <ItemDescription>Frontend Engineer @ Manifold</ItemDescription>
+          </DescriptionListItem>
+          <DescriptionListItem>
+            <ItemTitle>
+              <EducationIcon />
+            </ItemTitle>
+            <ItemDescription>
+              Software Engineering @ University of New Brunswick
+            </ItemDescription>
+          </DescriptionListItem>
+          <DescriptionListItem>
+            <ItemTitle>
+              <LocationIcon />
+            </ItemTitle>
+            <ItemDescription>Halifax, Canada</ItemDescription>
+          </DescriptionListItem>
+        </DescriptionList>
+      </StyledCard>
+      <Card isText>
+        <CardHeader>My Love Language is</CardHeader>
+        <CardText>CSS. I love making things look pretty!</CardText>
       </Card>
       <Card>
-        <CardHeader>Section 4</CardHeader>
+        <CardHeader>Bill Murray</CardHeader>
+        <CardMedia
+          src="http://www.fillmurray.com/600/600"
+          alt=""
+          description={{
+            heading: 'Title',
+            body: 'Some description',
+          }}
+        />
+      </Card>
+      <Card isText>
+        <CardHeader>Do you agree or disagree that</CardHeader>
+        <CardText>TypeScript is better than JavaScript.</CardText>
       </Card>
       <Card>
-        <CardHeader>Section 5</CardHeader>
+        <CardHeader>Bill Murray</CardHeader>
+        <CardMedia
+          src="http://www.fillmurray.com/700/600"
+          alt=""
+          description={{
+            heading: 'Title',
+            body: 'Some description',
+          }}
+        />
+      </Card>
+      <Card>
+        <CardHeader>Bill Murray</CardHeader>
+        <CardMedia
+          src="http://www.fillmurray.com/600/700"
+          alt=""
+          description={{
+            heading: 'Title',
+            body: 'Some description',
+          }}
+        />
       </Card>
     </Container>
   </main>

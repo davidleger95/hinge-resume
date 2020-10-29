@@ -3,6 +3,8 @@
   --text-color: #000;
 
   --pink: #e9baa7;
+  --hinge-purple: #6a42ed;
+  --hinge-purple-light: #6a42ed44;
 }
 
 html {
@@ -20,4 +22,19 @@ html {
 
 .icon {
   height: 1.5em;
+}
+
+button {
+  cursor: pointer;
+  transition: all ease-in-out 0.25s;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--hinge-purple),
+    0 0 2px 6px var(--hinge-purple-light);
+}
+
+button:hover {
+  transform: scale(1.1);
 }
