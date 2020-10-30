@@ -5,6 +5,7 @@
   --pink: #e9baa7;
   --hinge-purple: #6a42ed;
   --hinge-purple-light: #6a42ed44;
+  --hinge-pink: #f6d6c8;
 }
 
 html {
@@ -38,4 +39,14 @@ button:focus {
 
 button:hover {
   transform: scale(1.1);
+}
+
+a {
+  color: inherit;
+}
+
+a:hover,
+a:focus {
+  outline: none;
+  color: var(--hinge-purple);
 }

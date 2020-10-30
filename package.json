@@ -33,6 +33,7 @@
     ]
   },
   "dependencies": {
+    "@formspree/react": "^2.2.3",
     "@types/styled-components": "^5.1.4",
     "babel-plugin-styled-components": "^1.11.1",
     "gatsby": "2.24.63",
