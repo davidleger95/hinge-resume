@@ -8,7 +8,7 @@ export const DescriptionListItem = styled.div`
   grid-template-columns: auto 1fr;
   align-items: center;
   gap: 1rem;
-  padding: 1.25rem 1rem;
+  padding: 0.75rem;
 
   &:not(:last-child) {
     border-bottom: 1px solid #0002;
@@ -18,4 +18,5 @@ export const ItemTitle = styled.dt``;
 export const ItemDescription = styled.dd`
   margin: 0;
   padding: 0;
+  font-size: 0.9rem;
 `;

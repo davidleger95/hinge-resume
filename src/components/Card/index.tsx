@@ -59,7 +59,12 @@ const Mask = styled.div<{ isOpen?: boolean }>`
   transition: opacity ease-in-out 0.5s;
 `;
 
-export const Card: FC<{ isText?: boolean }> = ({ children, ...props }) => {
+interface CardProps {
+  isText?: boolean;
+  content: string;
+}
+
+export const Card: FC<CardProps> = ({ children, content, ...props }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <CardWrapper isOpen={isOpen}>
@@ -68,7 +73,9 @@ export const Card: FC<{ isText?: boolean }> = ({ children, ...props }) => {
         {children}
         {isOpen || <LikeButton onClick={() => setIsOpen(true)} />}
       </StyledCard>
-      {isOpen && <ContactForm close={() => setIsOpen(false)} />}
+      {isOpen && (
+        <ContactForm close={() => setIsOpen(false)} content={content} />
+      )}
     </CardWrapper>
   );
 };
